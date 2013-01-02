@@ -554,7 +554,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Gets the changeset for an document.
+     * Gets the changeset for a document.
      *
      * @param object $document
      * @return array
@@ -1338,7 +1338,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Schedules an document for insertion into the database.
+     * Schedules a document for insertion into the database.
      * If the document already has an identifier, it will be added to the identity map.
      *
      * @param ClassMetadata $class
@@ -1388,7 +1388,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is scheduled for insertion.
+     * Checks whether a document is scheduled for insertion.
      *
      * @param object $document
      * @return boolean
@@ -1399,7 +1399,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is scheduled for upsert.
+     * Checks whether a document is scheduled for upsert.
      *
      * @param object $document
      * @return boolean
@@ -1410,7 +1410,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Schedules an document for being updated.
+     * Schedules a document for being updated.
      *
      * @param object $document The document to schedule for being updated.
      * @throws \InvalidArgumentException
@@ -1453,7 +1453,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is registered as dirty in the unit of work.
+     * Checks whether a document is registered as dirty in the unit of work.
      * Note: Is not very useful currently as dirty documents are only registered
      * at commit time.
      *
@@ -1473,7 +1473,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Schedules an document for deletion.
+     * Schedules a document for deletion.
      *
      * @param object $document
      */
@@ -1505,7 +1505,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is registered as removed/deleted with the unit
+     * Checks whether a document is registered as removed/deleted with the unit
      * of work.
      *
      * @param object $document
@@ -1517,7 +1517,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is scheduled for insertion, update or deletion.
+     * Checks whether a document is scheduled for insertion, update or deletion.
      *
      * @param $document
      * @return boolean
@@ -1532,7 +1532,8 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Registers an document in the identity map.
+     * Registers a document in the identity map.
+     *
      * Note that documents in a hierarchy are registered with the class name of
      * the root document.
      *
@@ -1565,7 +1566,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Gets the state of an document within the current unit of work.
+     * Gets the state of a document within the current unit of work.
      *
      * NOTE: This method sees documents that are not MANAGED or REMOVED and have a
      *       populated identifier, whether it is generated or manually assigned, as
@@ -1624,7 +1625,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Removes an document from the identity map. This effectively detaches the
+     * Removes a document from the identity map. This effectively detaches the
      * document from the persistence management of Doctrine.
      *
      * @ignore
@@ -1661,7 +1662,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Gets an document in the identity map by its identifier hash.
+     * Gets a document in the identity map by its identifier.
      *
      * @ignore
      * @param string $id
@@ -1675,7 +1676,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Tries to get an document by its identifier hash. If no document is found for
+     * Tries to get a document by its identifier. If no document is found for
      * the given hash, FALSE is returned.
      *
      * @ignore
@@ -1702,7 +1703,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Checks whether an document is registered in the identity map of this UnitOfWork.
+     * Checks whether a document is registered in the identity map.
      *
      * @param object $document
      * @return boolean
@@ -1727,7 +1728,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Checks whether an identifier hash exists in the identity map.
+     * Checks whether an identifier exists in the identity map.
      *
      * @ignore
      * @param string $id
@@ -1740,7 +1741,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Persists an document as part of the current unit of work.
+     * Persists a document as part of the current unit of work.
      *
      * @param object $document The document to persist.
      */
@@ -1755,7 +1756,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Saves an document as part of the current unit of work.
+     * Saves a document as part of the current unit of work.
      * This method is internally called during save() cascades as it tracks
      * the already visited documents to prevent infinite recursions.
      *
@@ -1812,7 +1813,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Deletes an document as part of the current unit of work.
+     * Deletes a document as part of the current unit of work.
      *
      * @param object $document The document to remove.
      */
@@ -1823,7 +1824,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Deletes an document as part of the current unit of work.
+     * Deletes a document as part of the current unit of work.
      *
      * This method is internally called during delete() cascades as it tracks
      * the already visited documents to prevent infinite recursions.
@@ -1942,7 +1943,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Executes a merge operation on an document.
+     * Executes a merge operation on a document.
      *
      * @param object $document
      * @param array $visited
@@ -2091,7 +2092,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Detaches an document from the persistence management. It's persistence will
+     * Detaches a document from the persistence management. It's persistence will
      * no longer be managed by Doctrine.
      *
      * @param object $document The document to detach.
@@ -2148,7 +2149,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Executes a refresh operation on an document.
+     * Executes a refresh operation on a document.
      *
      * @param object $document The document to refresh.
      * @param array $visited The already visited documents during cascades.
@@ -2516,7 +2517,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Creates an document. Used for reconstitution of documents during hydration.
+     * Creates a document. Used for reconstitution of documents during hydration.
      *
      * @ignore
      * @param string $className The name of the document class.
@@ -2621,7 +2622,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Gets the original data of an document. The original data is the data that was
+     * Gets the original data of a document. The original data is the data that was
      * present at the time the document was reconstituted from the database.
      *
      * @param object $document
@@ -2646,7 +2647,7 @@ class UnitOfWork implements PropertyChangedListener
 
     /**
      * INTERNAL:
-     * Sets a property value of the original data array of an document.
+     * Sets a property value of the original data array of a document.
      *
      * @ignore
      * @param string $oid
@@ -2659,7 +2660,7 @@ class UnitOfWork implements PropertyChangedListener
     }
 
     /**
-     * Gets the identifier of an document.
+     * Gets the identifier of a document.
      * The returned value is always an array of identifier values. If the document
      * has a composite identifier then the identifier values are in the same
      * order as the identifier field names as returned by ClassMetadata#getIdentifierFieldNames().
@@ -2733,7 +2734,7 @@ class UnitOfWork implements PropertyChangedListener
     /* PropertyChangedListener implementation */
 
     /**
-     * Notifies this UnitOfWork of a property change in an document.
+     * Notifies this UnitOfWork of a property change in a document.
      *
      * @param object $document The document that owns the property.
      * @param string $propertyName The name of the property that changed.
