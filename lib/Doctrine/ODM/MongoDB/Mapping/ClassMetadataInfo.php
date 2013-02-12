@@ -1325,7 +1325,7 @@ class ClassMetadataInfo implements \Doctrine\Common\Persistence\Mapping\ClassMet
      * Gets the document identifier.
      *
      * @param object $document
-     * @return string $id
+     * @return mixed $id
      */
     public function getIdentifierValue($document)
     {
