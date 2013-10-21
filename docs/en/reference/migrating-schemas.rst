@@ -156,7 +156,7 @@ Later on, you may want to migrate this data into an embedded Address document:
         }
     }
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Person
     {
         /** @Id */
@@ -194,7 +194,7 @@ Alternatively, you could defer this migration until the Person is saved:
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Person
     {
         // ...

@@ -520,6 +520,26 @@ class upon retrieval
 Alias of @Field, with "type" attribute set to
 "float"
 
+@HasLifecycleCallbacks
+----------------------
+
+This annotation must be set on the document class to instruct Doctrine to check
+for lifecycle callback annotations on public methods. Using `@PreFlush`_,
+`@PreLoad`_, `@PostLoad`_, `@PrePersist`_, `@PostPersist`_, `@PreRemove`_,
+`@PostRemove`_, `@PreUpdate`_, or `@PostUpdate`_ without this annotation will
+cause Doctrine to ignore the callbacks.
+
+.. code-block:: php
+
+    <?php
+
+    /** @Document @HasLifecycleCallbacks */
+    class User
+    {
+        /** @PostPersist */
+        public function sendWelcomeEmail() {}
+    }
+
 @Hash
 -----
 
@@ -725,13 +745,15 @@ they exist but never saved.
 @PostLoad
 ---------
 
-Marks a method on the document to be called as a @PostLoad event.
+Marks a method on the document class to be called on the ``postLoad`` event. The
+`@HasLifecycleCallbacks`_ annotation must be present on the same class for the
+method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -743,17 +765,20 @@ Marks a method on the document to be called as a @PostLoad event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PostPersist
 ------------
 
-Marks a method on the document to be called as a @PostPersist
-event.
+Marks a method on the document class to be called on the ``postPersist`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -765,16 +790,20 @@ event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PostRemove
 -----------
 
-Marks a method on the document to be called as a @PostRemove event.
+Marks a method on the document class to be called on the ``postRemove`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -786,16 +815,20 @@ Marks a method on the document to be called as a @PostRemove event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PostUpdate
 -----------
 
-Marks a method on the document to be called as a @PostUpdate event.
+Marks a method on the document class to be called on the ``postUpdate`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -807,16 +840,45 @@ Marks a method on the document to be called as a @PostUpdate event.
         }
     }
 
-@PreLoad
---------
+See :ref:`lifecycle_events` for more information.
 
-Marks a method on the document to be called as a @PreLoad event.
+@PreFlush
+---------
+
+Marks a method on the document class to be called on the ``preFlush`` event. The
+`@HasLifecycleCallbacks`_ annotation must be present on the same class for the
+method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
+    class Article
+    {
+        // ...
+    
+        /** @PreFlush */
+        public function preFlush()
+        {
+            // ...
+        }
+    }
+
+See :ref:`lifecycle_events` for more information.
+
+@PreLoad
+--------
+
+Marks a method on the document class to be called on the ``preLoad`` event. The
+`@HasLifecycleCallbacks`_ annotation must be present on the same class for the
+method to be registered.
+
+.. code-block:: php
+
+    <?php
+
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -828,16 +890,20 @@ Marks a method on the document to be called as a @PreLoad event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PrePersist
 -----------
 
-Marks a method on the document to be called as a @PrePersist event.
+Marks a method on the document class to be called on the ``prePersist`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -849,16 +915,20 @@ Marks a method on the document to be called as a @PrePersist event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PreRemove
 ----------
 
-Marks a method on the document to be called as a @PreRemove event.
+Marks a method on the document class to be called on the ``preRemove`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -870,16 +940,20 @@ Marks a method on the document to be called as a @PreRemove event.
         }
     }
 
+See :ref:`lifecycle_events` for more information.
+
 @PreUpdate
 ----------
 
-Marks a method on the document to be called as a @PreUpdate event.
+Marks a method on the document class to be called on the ``preUpdate`` event.
+The `@HasLifecycleCallbacks`_ annotation must be present on the same class for
+the method to be registered.
 
 .. code-block:: php
 
     <?php
 
-    /** @Document */
+    /** @Document @HasLifecycleCallbacks */
     class Article
     {
         // ...
@@ -890,6 +964,8 @@ Marks a method on the document to be called as a @PreUpdate event.
             // ...
         }
     }
+
+See :ref:`lifecycle_events` for more information.
 
 @ReferenceMany
 --------------
