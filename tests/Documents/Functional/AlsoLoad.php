@@ -4,7 +4,7 @@ namespace Documents\Functional;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
-/** @ODM\Document(collection="functional_tests") @ODM\HasLifecycleCallbacks */
+/** @ODM\Document(collection="functional_tests") */
 class AlsoLoad
 {
     /** @ODM\Id */
