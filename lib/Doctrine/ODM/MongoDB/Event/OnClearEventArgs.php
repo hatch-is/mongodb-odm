@@ -19,43 +19,65 @@
 
 namespace Doctrine\ODM\MongoDB\Event;
 
-use Doctrine\Common\Persistence\Event\OnClearEventArgs as BaseOnClearEventArgs;
-
 /**
  * Provides event arguments for the onClear event.
  *
- * @since 1.0
+ * @since       1.0
+ * @author      Roman Borschel <roman@code-factory.de>
+ * @author      Benjamin Eberlei <kontakt@beberlei.de>
+ * @author      Jonathan H. Wage <jonwage@gmail.com>
  */
-class OnClearEventArgs extends BaseOnClearEventArgs
+class OnClearEventArgs extends \Doctrine\Common\EventArgs
 {
     /**
-     * Retrieves the associated DocumentManager.
+     * @var \Doctrine\ODM\MongoDB\DocumentManager
+     */
+    private $dm;
+
+    /**
+     * @var string
+     */
+    private $documentClass;
+
+    /**
+     * Constructor.
+     *
+     * @param \Doctrine\ODM\MongoDB\DocumentManager $dm
+     * @param string $documentClass Optional document class
+     */
+    public function __construct($dm, $documentClass = null)
+    {
+        $this->em          = $dm;
+        $this->documentClass = $documentClass;
+    }
+
+    /**
+     * Retrieve associated DocumentManager.
      *
      * @return \Doctrine\ODM\MongoDB\DocumentManager
      */
     public function getDocumentManager()
     {
-        return $this->getObjectManager();
+        return $this->em;
     }
 
     /**
-     * Returns the name of the document class that is cleared, or null if all
-     * are cleared.
+     * Name of the document class that is cleared, or empty if all are cleared.
      *
-     * @return string|null
+     * @return string
      */
     public function getDocumentClass()
     {
-        return $this->getEntityClass();
+        return $this->documentClass;
     }
 
     /**
-     * Returns whether this event clears all documents.
+     * Check if event clears all documents.
      *
      * @return bool
      */
     public function clearsAllDocuments()
     {
-        return $this->clearsAllEntities();
+        return ($this->documentClass === null);
     }
 }

@@ -22,8 +22,28 @@ namespace Doctrine\ODM\MongoDB\Event;
 /**
  * Provides event arguments for the preFlush event.
  *
- * @since 1.0
+ * @since       1.0
+ * @author      Roman Borschel <roman@code-factory.de>
+ * @author      Benjamin Eberlei <kontakt@beberlei.de>
+ * @author      Jonathan H. Wage <jonwage@gmail.com>
  */
-class PreFlushEventArgs extends ManagerEventArgs
+class PreFlushEventArgs extends \Doctrine\Common\EventArgs
 {
+    /**
+     * @var \Doctrine\ODM\MongoDB\DocumentManager
+     */
+    private $dm;
+
+    public function __construct($dm)
+    {
+        $this->dm = $dm;
+    }
+
+    /**
+     * @return \Doctrine\ODM\MongoDB\DocumentManager
+     */
+    public function getDocumentManager()
+    {
+        return $this->dm;
+    }
 }

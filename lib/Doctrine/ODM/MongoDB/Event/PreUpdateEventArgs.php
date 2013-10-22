@@ -22,9 +22,11 @@ namespace Doctrine\ODM\MongoDB\Event;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 /**
- * Class that holds event arguments for a preUpdate event.
+ * Class that holds event arguments for a preInsert/preUpdate event.
  *
- * @since 1.0
+ * @since       1.0
+ * @author      Jonathan H. Wage <jonwage@gmail.com>
+ * @author      Roman Borschel <roman@code-factory.org>
  */
 class PreUpdateEventArgs extends LifecycleEventArgs
 {
@@ -34,34 +36,26 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     private $documentChangeSet;
 
     /**
-     * Constructor.
      *
-     * @param object          $document
+     * @param object $document
      * @param DocumentManager $dm
-     * @param array           $changeSet
+     * @param array $changeSet
      */
-    public function __construct($document, DocumentManager $dm, array &$changeSet)
+    public function __construct($document, $dm, array &$changeSet)
     {
         parent::__construct($document, $dm);
         $this->documentChangeSet = &$changeSet;
     }
 
-    /**
-     * Retrieves the document changeset.
-     *
-     * @return array
-     */
     public function getDocumentChangeSet()
     {
         return $this->documentChangeSet;
     }
 
     /**
-     * Checks if field has a changeset.
+     * Field has a changeset?
      *
-     * @param string $field
-     *
-     * @return boolean
+     * @return bool
      */
     public function hasChangedField($field)
     {
@@ -69,9 +63,9 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     }
 
     /**
-     * Gets the old value of the changeset of the changed field.
-     *
-     * @param string $field
+     * Get the old value of the changeset of the changed field.
+     * 
+     * @param  string $field
      * @return mixed
      */
     public function getOldValue($field)
@@ -82,9 +76,9 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     }
 
     /**
-     * Gets the new value of the changeset of the changed field.
+     * Get the new value of the changeset of the changed field.
      *
-     * @param string $field
+     * @param  string $field
      * @return mixed
      */
     public function getNewValue($field)
@@ -95,10 +89,10 @@ class PreUpdateEventArgs extends LifecycleEventArgs
     }
 
     /**
-     * Sets the new value of this field.
-     *
+     * Set the new value of this field.
+     * 
      * @param string $field
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function setNewValue($field, $value)
     {
@@ -107,20 +101,13 @@ class PreUpdateEventArgs extends LifecycleEventArgs
         $this->documentChangeSet[$field][1] = $value;
     }
 
-    /**
-     * Asserts the field exists in changeset.
-     *
-     * @param string $field
-     * @throws \InvalidArgumentException if the field has no changeset
-     */
     private function assertValidField($field)
     {
         if ( ! isset($this->documentChangeSet[$field])) {
-            throw new \InvalidArgumentException(sprintf(
-                'Field "%s" is not a valid field of the document "%s" in PreUpdateEventArgs.',
-                $field,
-                get_class($this->getDocument())
-            ));
+            throw new \InvalidArgumentException(
+                "Field '".$field."' is not a valid field of the document ".
+                "'".get_class($this->getDocument())."' in PreInsertUpdateEventArgs."
+            );
         }
     }
 }

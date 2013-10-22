@@ -67,9 +67,8 @@ Working with Objects
 Advanced Topics
 ---------------
 
-* **Collections**
-  :doc:`Capped Collections <reference/capped-collections>` |
-  :doc:`Collection Strategies <reference/collection-strategies>`
+* **Capped Collections**
+  :doc:`Capped Collections <reference/capped-collections>`
 
 * **Best Practices**:
   :doc:`Best Practices <reference/best-practices>`

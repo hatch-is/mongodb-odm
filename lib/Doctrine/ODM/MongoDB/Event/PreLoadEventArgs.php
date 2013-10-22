@@ -19,37 +19,65 @@
 
 namespace Doctrine\ODM\MongoDB\Event;
 
+use Doctrine\Common\EventArgs;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 /**
- * Class that holds event arguments for a preLoad event.
+ * PreLoad event arguments.
  *
- * @since 1.0
+ * @since       1.0
+ * @author      Jonathan H. Wage <jonwage@gmail.com>
+ * @author      Roman Borschel <roman@code-factory.org>
  */
-class PreLoadEventArgs extends LifecycleEventArgs
+class PreLoadEventArgs extends EventArgs
 {
+    /**
+     * @var DocumentManager
+     */
+    private $dm;
+
+    /**
+     * @var object
+     */
+    private $document;
+
     /**
      * @var array
      */
     private $data;
 
     /**
-     * Constructor.
-     *
-     * @param object          $document
+     * @param object $document
      * @param DocumentManager $dm
-     * @param array           $data     Array of data to be loaded and hydrated
+     * @param array $data
      */
-    public function __construct($document, DocumentManager $dm, array &$data)
+    public function __construct($document, $dm, array &$data)
     {
-        parent::__construct($document, $dm);
+        $this->document = $document;
+        $this->dm = $dm;
         $this->data = $data;
+    }
+
+    /**
+     * @return object
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @return DocumentManager
+     */
+    public function getDocumentManager()
+    {
+        return $this->dm;
     }
 
     /**
      * Get the array of data to be loaded and hydrated.
      *
-     * @return array
+     * @return array $data
      */
     public function &getData()
     {
